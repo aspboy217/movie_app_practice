@@ -9,3 +9,6 @@ https://nomadcoders.co/
 # Notes
 - .env.development file 
 -- "BROWSER=chrome" to compile with Google Chrome
+
+
+this is test
