@@ -1,0 +1,97 @@
+array:
+  const arrayName = [];
+
+array elements:
+  1. [ "kimchi", "potato" ]     : each element has one item
+  2. [{name:"kimchi",desc:"Korean"}, {name:"Bibimbap",desc:"Also Korean"}]
+                                : each element has multiple types (?)
+
+function:
+  function functionName(propsToPass) { ... return (); } // need return since this is function
+
+function arguments:
+  1. functionName()             : nothing
+  2. functionName(props)        : props object ("props" is a keyword)
+  3. functionName({name, desc}) : multiple objects
+
+forms of map function
+  1. arrayName.map(dish => (<Food name={dish.name} desc={dish.desc} />))
+  2. arrayName.map(function(dish) {<Food name={dish.name} desc={dish.desc} />})
+  3. arrayName.map(functionName)
+      functionName(dish) { return <Food name={dish.name} desc={dish.desc} />; }
+      arguments to functionName is each element of arrayName
+
+map function with keys (react internals only) - must always return something 
+  arrayName.map(dish => (<Food key={dish.id} name={dish.name} desc={dish.desc} />))
+    each element in arrayName has a component called "id" with unique numbers
+  arrayName.map((dish, index) => <div key={index}>{dish.name}</div>)  // in case we don't have keys in dish   
+
+Image tag (to show image through a link)
+  <img src={linkToTheImage} alt={nameForTheImage} />
+
+https://www.npmjs.com/package/prop-types
+prop type check dependency (useful to check props)
+  npm i prop-types  // terminal
+  import PropTypes from "prop-types";   // on the top of the file I want to use the dependency
+  componentName.propTypes = { // see console log to see if there is any error with prop types
+    prop_one: PropTypes.string.isRequired, // isRequired means this "name" prop is required every time
+    prop_two: PropTypes.string.isRequired,
+    prop_three: PropTypes.number  // isRequired is not here -> "rating" prop is not required every time
+  } // place outside any function
+
+React class component
+  - has state: class objects that WILL CHANGE
+  class className extends React.Component { ... render(){return (...)}; }  // no return since this is not a function
+                                                // needs render method
+  functionName = () => {...};      // class method (JS)    
+  functionName() { ... };          // same thing                                            
+  { this.functionName }     // to call class method
+  // NOT DO: { this.functionName() } <- this will just call a function every time it renders
+  state = { count: 0,};     // to set state in class component
+  { this.state.count }      // to use state
+  this.state.count = 1;     // DO NOT mutate state directly (if we do this -> React will not render)
+  this.setState({count: this.state.count + 1}) // to change the state (using this.count to update is not a good practice tho)
+  this.setState(current => ({count: current.count + 1})) // to change state (better way)
+                                                        // current gives current states
+  - every time we change states -> React re-renders the render function
+
+console log placement in render
+  render() {
+    console.log("this is the spot);       // place it before return in render 
+    return(
+      ...
+    )
+  };
+
+useful functions we can use in the class component
+  1. componentDidMount() { console.log("component mounted"); }      // this is called when component is created
+  2. componentDidUpdate() { console.log("component updated"); }     // this is called whenever any state of the component is updated 
+  3. componentDidUnMount() { console.log("component unmounted"); }  // this is called whenever component is gone
+
+To fetch data (receive?) using "axios" dependency
+  npm i axios 
+  const movies = axios.get("link-to-the-data");     // to fetch (might take a while)
+  - to tell JS to wait for a little bit of time:
+      getMovies = async () => {  // this async (you need to wait for this function! -- for what?)
+        const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+      }             // ^ this await (for this axios!)
+          // MUST USE "async" and "await" together
+
+To fetch: note this!
+  1. const movies = axios.get("link-to-the-data");      // regular way to fetch the whole movie data
+  --> movies.data.data.movies                           // need to type these to get whatever data we want
+  2. const {data: {data: {movies}}} = axios.get("link-to-the-data"); 
+  --> movies                                            // now we can use data in a compact way
+
+to setState
+  this.setState({ movies: movies })
+  this.setState({ movies })         // compact way (only works if state and variable have the same identifier)
+
+If you use class, you need to use "className" instead of "class" for HTML styling
+
+
+componentDidMount() {
+  setTimeout(() => {
+    this.setState({ isLoading: false })
+  }, 6000); // setTimeout is JS. will be executed in 6 seconds (6000)
+};  
