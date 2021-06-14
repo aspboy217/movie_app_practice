@@ -4,7 +4,7 @@
 ```https://nomadcoders.co/```
 
 # To run
-```npm start```
+``npm start``
 
 # Notes
 - check ```notes.txt``` for study notes
