@@ -6,6 +6,9 @@
 # To run
 ```npm start```
 
+# To access using web address (using gh-pages)
+```https://aspboy217.github.io/movie_app_practice/```
+
 # Notes
 - check ```notes.txt``` for study notes
 - movie data is from 

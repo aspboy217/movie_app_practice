@@ -95,3 +95,18 @@ componentDidMount() {
     this.setState({ isLoading: false })
   }, 6000); // setTimeout is JS. will be executed in 6 seconds (6000)
 };  
+
+https://www.npmjs.com/package/gh-pages?activeTab=readme
+using gh-pages (to make our app work on website)
+  npm i gh-pages
+  - make sure to change app information from 'public/index.html'
+    <title>Movie App</title>
+  - in package.json file at the end 
+    "homepage": "https://aspboy217.github.io/repo-name/"
+              github username ^      project name ^   ^ make sure to have this
+  - do "npm run build" in the terminal -> will create "build" directory in the project
+  - in package.json file in "scripts"
+    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
+  - do "npm run deploy"
+    check "Published" message at the end of the terminal output
