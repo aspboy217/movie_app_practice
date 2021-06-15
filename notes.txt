@@ -110,3 +110,50 @@ using gh-pages (to make our app work on website)
     "predeploy": "npm run build"
   - do "npm run deploy"
     check "Published" message at the end of the terminal output
+
+https://www.npmjs.com/package/react-router-dom
+using react-router-dom 
+  - what router does: 
+    if you are at "/" go to "Home.js"
+    if you are at "/about" go to "About.js"
+    router looks at the url and route to the right page
+  npm i react-router-dom
+  - in App.js file
+    import { HashRouter, Route } from "react-router-dom";
+  - if there is a url path in <HashRouter> ... </HashRouter>, router renters everything that has path
+    path="/" ... path="/about"
+    if usl is "/" -> react dom renders both.
+    So we need to pass another prop: "exact={ true }"
+  - in App.js return part:
+      return( 
+        <HashRouter>
+          <Route path="/" exact={ true } component={ Home } /> // just put exact to the common link
+          <Route path="/about" component={ About } />
+        </HashRouter>
+      );
+
+To navigate between pages
+  - wrong way: using html tags
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    -> not works because executing this will kill react components
+  - right way: using Link from 'react-router-dom'
+      import { Link } from 'react-router-dom';
+                &
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link> // cannot use this Link outside the router
+
+https://www.npmjs.com/package/react-router-dom
+Props between routes 
+  - if we use react-router -> some props are passed into the component automatically
+  - can send information about the clicked part to the component through the router
+      <Link to={{
+        pathname:'/movie-detail',
+        state: {
+          year, 
+          title, 
+          summary, 
+          poster, 
+          genres
+        }
+      }}>
